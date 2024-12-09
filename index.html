@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LW BOT</title>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.0.0/tsparticles.min.js"></script>
+<style>
+body {
+    background: linear-gradient(to bottom, #0b0b0b, #1d1d1d);
+    color: white;
+    font-family: 'Intro';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -13px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+
+@font-face {
+    font-family: 'Intro';
+    src: url('./intro.otf') format('opentype');
+}
+
+.container {
+    background: linear-gradient(80deg, #393939a7, #737373af);
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(59, 59, 59, 0.3);
+    padding: 20px;
+    overflow: hidden;
+    width: 70%;
+    max-width: 600px;
+    min-width: 250px;
+}
+
+.menu {
+    display: grid;
+    grid-gap: 8px;
+}
+
+/* Макет для больших экранов (более 600px) */
+@media (min-width: 601px) {
+    .menu {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+/* Макет для маленьких экранов (600px и меньше) */
+@media (max-width: 600px) {
+    .menu {
+        grid-template-columns: 1fr; 
+    }
+}
+
+@media (max-height: 690px) {
+    .wrapper {
+        margin-top: 16px;
+    }
+}
+
+p {
+    color: black;
+}
+
+.menu-item {
+    background-color: rgba(25, 25, 25, 0.7);
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(94, 94, 94, 0.725);
+    padding: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.menu-item img {
+    max-width: 40%;
+    height: auto;
+    box-shadow: 0 0 30px rgba(48, 131, 255, 0.725);
+    margin-right: 20px;
+    display: block;
+    border-radius: 15px;
+}
+
+.menu-item button {
+    background: linear-gradient(to bottom, #008cff, #006affb2);
+    border: none;
+    color: white;
+    margin-top: 4px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    opacity: 0.8;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin-top: 10px;
+}
+
+.buttons button {
+    background: linear-gradient(to bottom, #008cff, #006affb2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 10px; 
+    border-radius: 15px;
+    cursor: pointer;
+    width: fit-content; 
+}
+
+.instruction-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.instruction-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+    width: 80%;
+}
+
+.instruction-container p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.instruction-container button {
+    margin-top: 20px;
+    background-color: #f00;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="title">LW BOT</div>
+    <div class="container">
+        <div class="menu">
+            <div class="menu-item">
+                <img src="./image1.png" alt="Игра 1">
+                <button onclick="openGame('game1')" data-key="open_game">Открыть</button>
+            </div>
+            <div class="menu-item">
+                <img src="./image2.png" alt="Игра 2">
+                <button onclick="openGame('game2')" data-key="open_game">Открыть</button>
+            </div>
+            <div class="menu-item">
+                <img src="./image3.png" alt="Игра 3">
+                <button onclick="openGame('game3')" data-key="open_game">Открыть</button>
+            </div>
+            <div class="menu-item">
+                <img src="./image4.png" alt="Игра 4">
+                <button onclick="openGame('game4')" data-key="open_game">Открыть</button>
+            </div>
+        </div>
+    </div>
+    <div class="buttons">
+        <button onclick="showInstructions()">ИНСТРУКЦИЯ</button>
+        <button onclick="window.open('https://1wqydy.top/casino/list?open=register&p=kpy9', '_blank')">ИГРАЕМ ТУТ</button>
+    </div>
+    <div class="instruction-overlay" id="instruction-overlay">
+        <div class="instruction-container">
+            <p>Инструкция</p>
+            <p>Чтобы сигналы начали работать, необходимо зарегистрировать новый аккаунт по ссылке в боте используя промокод "44VIP", подробное видео находится в закрепе. Таким образом Вы подвяжете свой профиль к боту и будете получать сигналы более 98% проходимости.</p>
+            <button onclick="hideInstructions()">Закрыть</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('instruction-overlay').style.display = 'none';
+
+    function openGame(gameId) {
+        const iframe = document.createElement('iframe');
+        iframe.src = `./games/${gameId}/index.html`;
+        iframe.style.position = 'fixed';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = 'none';
+        iframe.style.margin = '0';
+        iframe.style.zIndex = '9999';
+        iframe.style.borderRadius = '0';
+        document.body.appendChild(iframe);
+    }
+
+    const path1 = 'game1/index.html';
+    const path2 = 'game2/index.html';
+    const path3 = 'game3/index.html';
+    const path4 = 'game4/index.html';
+
+    async function createMenuItems() {
+        const menu = document.querySelector(".menu");
+        const gameData = [
+            { imgSrc: 'image1.png', gameId: 'game1' },
+            { imgSrc: 'image2.png', gameId: 'game2' },
+            { imgSrc: 'image3.png', gameId: 'game3' },
+            { imgSrc: 'image4.png', gameId: 'game4' },
+        ];
+
+        gameData.forEach(game => {
+            const menuItem = document.createElement('div');
+            menuItem.classList.add('menu-item');
+            menuItem.innerHTML = `
+                <img src="${game.imgSrc}" alt="Игра">
+                <button onclick="openGame('${game.gameId}')">ОТКРЫТЬ</button>
+            `;
+            menu.appendChild(menuItem);
+        });
+    }
+
+    function showInstructions() {
+        document.getElementById('instruction-overlay').style.display = 'flex';
+    }
+
+    function hideInstructions() {
+        document.getElementById('instruction-overlay').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
